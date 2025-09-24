@@ -1,14 +1,19 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
-void main() {
-  fetch();
+Future main() async {
+  final json = await fetch();
+  print(json['id']);
 }
 
-  Future fetch() async {
+  Future<Map> fetch() async {
     var url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
     var response = await http.get(url);
-    print(response);
+    var json = jsonDecode(response.body);
+    return json;
   }
 
 
+ 
 
